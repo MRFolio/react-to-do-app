@@ -10,8 +10,8 @@ const ToDoList = ({ tasks, setTasks }) => {
             tasks={tasks}
             setTasks={setTasks}
             text={task.text}
+            id={task.id}
             key={task.id}
-            task={task}
           />
         ))}
       </ul>

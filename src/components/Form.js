@@ -9,14 +9,15 @@ const Form = ({ tasks, setTasks }) => {
     setInput(e.target.value);
   }
 
-  function handleAddTask() {
+  function handleAddTask(e) {
+    e.preventDefault();
     const newTask = { id: shortid.generate(), text: input };
     setTasks([...tasks, newTask]);
     setInput("");
   }
 
   return (
-    <div className="form">
+    <form className="form">
       <input
         className="input"
         type="text"
@@ -26,7 +27,7 @@ const Form = ({ tasks, setTasks }) => {
       <button onClick={handleAddTask} className="btn" type="submit">
         <FaPlusSquare />
       </button>
-    </div>
+    </form>
   );
 };
 
