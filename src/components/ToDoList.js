@@ -10,6 +10,7 @@ const ToDoList = ({ tasks, setTasks }) => {
             tasks={tasks}
             setTasks={setTasks}
             text={task.text}
+            date={task.date}
             id={task.id}
             key={task.id}
           />

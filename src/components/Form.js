@@ -11,7 +11,8 @@ const Form = ({ tasks, setTasks }) => {
 
   function handleAddTask(e) {
     e.preventDefault();
-    const newTask = { id: shortid.generate(), text: input };
+    const date = new Date().toLocaleDateString();
+    const newTask = { id: shortid.generate(), text: input, date };
     setTasks([...tasks, newTask]);
     setInput("");
   }

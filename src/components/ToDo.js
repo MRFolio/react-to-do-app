@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 
-const ToDo = ({ text, id, tasks, setTasks }) => {
+const ToDo = ({ text, date, id, tasks, setTasks }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedInput, setEditedInput] = useState(text);
   function handleDeleteTask() {
@@ -12,7 +12,7 @@ const ToDo = ({ text, id, tasks, setTasks }) => {
   function handleEditTask() {
     if (isEditing) {
       const editedTasks = tasks.map((task) =>
-        task.id === id ? { id, text: editedInput } : task
+        task.id === id ? { id, text: editedInput, date } : task
       );
       setTasks(editedTasks);
     }
@@ -38,6 +38,9 @@ const ToDo = ({ text, id, tasks, setTasks }) => {
         )}
       </li>
       <div className="btns">
+        <p className="date">
+          <time datetime={date}>{date}</time>
+        </p>
         <button onClick={handleEditTask} className="edit-btn" type="button">
           <FaEdit />
         </button>

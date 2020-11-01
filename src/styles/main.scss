@@ -50,12 +50,17 @@
 
   .edit-input {
     padding: 0.25em;
-    margin-left: 1em;
   }
 
   .btns {
     margin-left: 2em;
   }
+
+  .date {
+    font-size: 0.7rem;
+    margin: 0 1em;
+  }
+
   .edit-btn,
   .delete-btn {
     cursor: pointer;
