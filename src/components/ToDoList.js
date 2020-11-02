@@ -11,6 +11,8 @@ const ToDoList = ({ tasks, setTasks }) => {
             setTasks={setTasks}
             text={task.text}
             date={task.date}
+            completed={task.completed}
+            priority={task.priority}
             id={task.id}
             key={task.id}
           />

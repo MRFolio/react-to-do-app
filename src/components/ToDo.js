@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { FaTrashAlt, FaEdit } from "react-icons/fa";
+import { FaTrashAlt, FaEdit, FaCheck } from "react-icons/fa";
 
-const ToDo = ({ text, date, id, tasks, setTasks }) => {
+const ToDo = ({ text, date, completed, priority, id, tasks, setTasks }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedInput, setEditedInput] = useState(text);
+
   function handleDeleteTask() {
     const newTaskList = tasks.filter((task) => task.id !== id);
     setTasks(newTaskList);
@@ -12,7 +13,9 @@ const ToDo = ({ text, date, id, tasks, setTasks }) => {
   function handleEditTask() {
     if (isEditing) {
       const editedTasks = tasks.map((task) =>
-        task.id === id ? { id, text: editedInput, date } : task
+        task.id === id
+          ? { id, text: editedInput, date, completed, priority }
+          : task
       );
       setTasks(editedTasks);
     }
@@ -23,9 +26,22 @@ const ToDo = ({ text, date, id, tasks, setTasks }) => {
     setEditedInput(e.target.value);
   }
 
+  function handleCompletedTask() {
+    const completedTasks = tasks.map((task) =>
+      task.id === id
+        ? { id, text, date, completed: !task.completed, priority }
+        : task
+    );
+    setTasks(completedTasks);
+  }
+
   return (
-    <div className="todo">
-      <li className={`todo-item ${text.length > 6 ? "long" : ""}`}>
+    <div
+      className={`todo ${
+        priority === "high" ? "high" : priority === "low" ? "low" : ""
+      }`}
+    >
+      <li className={`todo-item ${completed ? "completed" : ""}`}>
         {isEditing ? (
           <input
             onChange={handleInputChange}
@@ -39,12 +55,30 @@ const ToDo = ({ text, date, id, tasks, setTasks }) => {
       </li>
       <div className="btns">
         <p className="date">
-          <time datetime={date}>{date}</time>
+          <time dateTime={date}>{date}</time>
         </p>
-        <button onClick={handleEditTask} className="edit-btn" type="button">
+        <button
+          onClick={handleEditTask}
+          className="edit-btn"
+          type="button"
+          title="Edit Task"
+        >
           <FaEdit />
         </button>
-        <button onClick={handleDeleteTask} className="delete-btn" type="button">
+        <button
+          onClick={handleCompletedTask}
+          className="completed-btn"
+          type="button"
+          title="Completed Task?"
+        >
+          <FaCheck />
+        </button>
+        <button
+          onClick={handleDeleteTask}
+          className="delete-btn"
+          type="button"
+          title="Delete Task"
+        >
           <FaTrashAlt />
         </button>
       </div>

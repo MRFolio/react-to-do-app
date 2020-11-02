@@ -1,5 +1,7 @@
 @use 'base';
 
+$highlight-bg-color: rgba(181, 238, 233, 0.3);
+
 .header {
   text-align: center;
   margin-bottom: 1em;
@@ -10,15 +12,39 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 1em;
-  text-align: center;
 
   .input {
+    font-size: 1.2rem;
     padding: 0.25em;
+    &:focus {
+      background: $highlight-bg-color;
+    }
+  }
+
+  .select-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .label {
+      font-size: 1rem;
+      text-align: center;
+      margin: 0.25em;
+    }
+    #priority-select {
+      font-size: 1rem;
+      text-transform: capitalize;
+      padding: 0.25em;
+      cursor: pointer;
+      &:hover {
+        background: $highlight-bg-color;
+      }
+    }
   }
 
   .btn {
     color: green;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     padding-top: 0.25em;
     background: transparent;
     border: none;
@@ -35,25 +61,33 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 2em;
   list-style: none;
   text-align: center;
-  border: 1px solid gold;
   padding: 0.25em;
-
-  .todo-item {
-    margin-bottom: 0.25em;
+  background: rgba(255, 166, 0, 0.2);
+  border: 1px solid yellowgreen;
+  &:nth-child(1n):not(:last-child) {
+    border-bottom: none;
   }
 
-  .todo-item.long {
-    text-shadow: #fc0 1px 0 10px;
+  &.high {
+    background: rgba(251, 4, 4, 0.2);
+  }
+  &.low {
+    background: rgba(156, 156, 156, 0.2);
+  }
+
+  .todo-item {
+    &.completed {
+      text-decoration: line-through;
+      opacity: 0.5;
+    }
   }
 
   .edit-input {
+    font-size: 1.4rem;
     padding: 0.25em;
-  }
-
-  .btns {
-    margin-left: 2em;
   }
 
   .date {
@@ -62,12 +96,21 @@
   }
 
   .edit-btn,
-  .delete-btn {
+  .delete-btn,
+  .completed-btn {
     cursor: pointer;
     color: rgb(233, 77, 77);
     font-size: 1.25rem;
     background: transparent;
     border: none;
     margin: 0 0.25em;
+  }
+
+  .completed-btn {
+    color: green;
+  }
+
+  .edit-btn {
+    color: orange;
   }
 }
