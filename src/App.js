@@ -8,15 +8,12 @@ import Header from "./components/Header";
 function App() {
   const [tasks, setTasks] = useState([]);
 
-  //do it only once
-  useEffect(() => {
-    getLocalTasks();
-  }, []);
-
+  //get tasks from local storage only once
+  useEffect(() => getLocalTasks(), []);
   // each time tasks change
-  useEffect(() => {
-    saveLocalTasks();
-  }, [tasks]);
+  useEffect(() => localStorage.setItem("tasks", JSON.stringify(tasks)), [
+    tasks,
+  ]);
 
   // Local storage
   const getLocalTasks = () => {
@@ -27,9 +24,6 @@ function App() {
       setTasks(localTasks);
     }
   };
-
-  const saveLocalTasks = () =>
-    localStorage.setItem("tasks", JSON.stringify(tasks));
 
   return (
     <div className="App">

@@ -5,18 +5,21 @@ const ToDoList = ({ tasks, setTasks }) => {
   return (
     <div className="tasks-container">
       <ul className="todo-list">
-        {tasks.map((task) => (
-          <ToDo
-            tasks={tasks}
-            setTasks={setTasks}
-            text={task.text}
-            date={task.date}
-            completed={task.completed}
-            priority={task.priority}
-            id={task.id}
-            key={task.id}
-          />
-        ))}
+        {tasks.map((task) => {
+          const { text, date, completed, priority, id } = task;
+          return (
+            <ToDo
+              tasks={tasks}
+              setTasks={setTasks}
+              text={text}
+              date={date}
+              completed={completed}
+              priority={priority}
+              id={id}
+              key={id}
+            />
+          );
+        })}
       </ul>
     </div>
   );
