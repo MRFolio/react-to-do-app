@@ -35,11 +35,11 @@ const Form = ({ tasks, setTasks }) => {
         type="text"
         value={input}
         onChange={handleInput}
-        placeholder="Type in task"
+        placeholder="Type in task..."
       />
       <div className="select-container">
         <label htmlFor="priority-select" className="label">
-          Task priority:
+          Choose task priority:
         </label>
         <select onChange={handleSelection} name="priority" id="priority-select">
           <option value="normal">Normal</option>
