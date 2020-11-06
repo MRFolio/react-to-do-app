@@ -15,17 +15,19 @@ const Form = ({ tasks, setTasks }) => {
   }
 
   function handleAddTask(e) {
-    e.preventDefault();
-    const date = new Date().toLocaleDateString();
-    const newTask = {
-      id: shortid.generate(),
-      text: input,
-      date,
-      completed: false,
-      priority: selection,
-    };
-    setTasks([...tasks, newTask]);
-    setInput("");
+    if (input) {
+      e.preventDefault();
+      const date = new Date().toLocaleDateString();
+      const newTask = {
+        id: shortid.generate(),
+        text: input,
+        date,
+        completed: false,
+        priority: selection,
+      };
+      setTasks([newTask, ...tasks]);
+      setInput("");
+    }
   }
 
   return (
