@@ -1,10 +1,10 @@
-@use 'base';
+@import "base";
 
 $highlight-bg-color: rgba(181, 238, 233, 0.3);
 
 .header {
   text-align: center;
-  margin-bottom: 1em;
+  margin: 0.4em 0;
 }
 
 .form {
@@ -15,7 +15,7 @@ $highlight-bg-color: rgba(181, 238, 233, 0.3);
 
   .input {
     width: 30%;
-    font-size: 1.2rem;
+    font-size: 1rem;
     padding: 0.25em;
     &:focus {
       background: $highlight-bg-color;
@@ -119,5 +119,27 @@ $highlight-bg-color: rgba(181, 238, 233, 0.3);
 
   .edit-btn {
     color: orange;
+  }
+}
+
+.filter-container {
+  margin: 0.4em 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .label-filter {
+    font-size: 1rem;
+    text-align: center;
+    margin: 0.25em;
+  }
+  #filter-select {
+    font-size: 1rem;
+    text-transform: capitalize;
+    padding: 0.25em;
+    cursor: pointer;
+    &:hover {
+      background: $highlight-bg-color;
+    }
   }
 }

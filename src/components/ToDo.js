@@ -1,7 +1,17 @@
 import { useState } from "react";
 import { FaTrashAlt, FaEdit, FaCheck } from "react-icons/fa";
 
-const ToDo = ({ text, date, completed, priority, id, tasks, setTasks }) => {
+const ToDo = ({
+  text,
+  date,
+  completed,
+  priority,
+  id,
+  tasks,
+  setTasks,
+  filterStatus,
+  setFilterStatus,
+}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedInput, setEditedInput] = useState(text);
 

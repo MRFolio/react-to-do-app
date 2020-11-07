@@ -1,12 +1,14 @@
 import "./styles/main.scss";
-import "./styles/_base.scss";
 import { useEffect, useState } from "react";
 import Form from "./components/Form";
 import ToDoList from "./components/ToDoList";
 import Header from "./components/Header";
+import Filter from "./components/Filter";
 
 function App() {
   const [tasks, setTasks] = useState([]);
+  const [filterStatus, setFilterStatus] = useState("All");
+  const [filteredTasks, setFilteredTasks] = useState([]);
 
   //get tasks from local storage only once
   useEffect(() => getLocalTasks(), []);
@@ -14,6 +16,20 @@ function App() {
   useEffect(() => localStorage.setItem("tasks", JSON.stringify(tasks)), [
     tasks,
   ]);
+
+  //Filter tasks
+  useEffect(() => {
+    switch (filterStatus) {
+      case "Completed":
+        setFilteredTasks(tasks.filter((task) => task.completed));
+        break;
+      case "Incompleted":
+        setFilteredTasks(tasks.filter((task) => !task.completed));
+        break;
+      default:
+        setFilteredTasks(tasks);
+    }
+  }, [tasks, filterStatus]);
 
   // Local storage
   const getLocalTasks = () => {
@@ -29,7 +45,12 @@ function App() {
     <div className="App">
       <Header />
       <Form tasks={tasks} setTasks={setTasks} />
-      <ToDoList tasks={tasks} setTasks={setTasks} />
+      <ToDoList
+        tasks={tasks}
+        setTasks={setTasks}
+        filteredTasks={filteredTasks}
+      />
+      <Filter setFilterStatus={setFilterStatus} />
     </div>
   );
 }
