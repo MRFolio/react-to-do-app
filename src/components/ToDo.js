@@ -1,17 +1,7 @@
 import { useState } from "react";
-import { FaTrashAlt, FaEdit, FaCheck } from "react-icons/fa";
+import { FaTrashAlt, FaEdit, FaCheck, FaTimes } from "react-icons/fa";
 
-const ToDo = ({
-  text,
-  date,
-  completed,
-  priority,
-  id,
-  tasks,
-  setTasks,
-  filterStatus,
-  setFilterStatus,
-}) => {
+const ToDo = ({ text, date, completed, priority, id, tasks, setTasks }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedInput, setEditedInput] = useState(text);
 
@@ -39,7 +29,10 @@ const ToDo = ({
   function handleCompletedTask() {
     const completedTasks = tasks.map((task) =>
       task.id === id
-        ? { id, text, date, completed: !task.completed, priority }
+        ? {
+            ...task,
+            completed: !task.completed,
+          }
         : task
     );
     setTasks(completedTasks);
@@ -65,7 +58,9 @@ const ToDo = ({
       </li>
       <div className="btns">
         <p className="date">
-          <time dateTime={date}>{date}</time>
+          <time dateTime={date} title="Date added">
+            {date}
+          </time>
         </p>
         <button
           onClick={handleEditTask}
@@ -79,9 +74,9 @@ const ToDo = ({
           onClick={handleCompletedTask}
           className="completed-btn"
           type="button"
-          title="Completed Task?"
+          title={!completed ? "Task is completed" : "Task is not completed"}
         >
-          <FaCheck />
+          {!completed ? <FaCheck /> : <FaTimes className="delete-icon" />}
         </button>
         <button
           onClick={handleDeleteTask}

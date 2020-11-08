@@ -39,16 +39,6 @@ const Form = ({ tasks, setTasks }) => {
         onChange={handleInput}
         placeholder="Type in task..."
       />
-      <div className="select-container">
-        <label htmlFor="priority-select" className="label">
-          Choose task priority:
-        </label>
-        <select onChange={handleSelection} name="priority" id="priority-select">
-          <option value="normal">Normal</option>
-          <option value="high">high</option>
-          <option value="low">low</option>
-        </select>
-      </div>
       <button
         onClick={handleAddTask}
         className="btn"
@@ -57,6 +47,16 @@ const Form = ({ tasks, setTasks }) => {
       >
         <FaPlusSquare />
       </button>
+      <div className="select-container">
+        <label htmlFor="priority-select" className="label">
+          {window.innerWidth < 526 ? "Task priority:" : "Choose task priority:"}
+        </label>
+        <select onChange={handleSelection} name="priority" id="priority-select">
+          <option value="normal">Normal</option>
+          <option value="high">high</option>
+          <option value="low">low</option>
+        </select>
+      </div>
     </form>
   );
 };

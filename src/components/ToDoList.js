@@ -1,6 +1,9 @@
 import ToDo from "./ToDo";
 
 const ToDoList = ({ tasks, setTasks, filteredTasks }) => {
+  function handleClick() {
+    setTasks([]);
+  }
   return (
     <div className="tasks-container">
       <ul className="todo-list">
@@ -18,6 +21,11 @@ const ToDoList = ({ tasks, setTasks, filteredTasks }) => {
           />
         ))}
       </ul>
+      {tasks.length > 0 && (
+        <button onClick={handleClick} className="delete-all">
+          Delete All Tasks
+        </button>
+      )}
     </div>
   );
 };
