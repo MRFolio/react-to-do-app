@@ -1,58 +1,99 @@
 @import "base";
 
-$highlight-bg-color: rgba(181, 238, 233, 0.3);
+$highlight-bg-color: rgba(171, 236, 117, 0.5);
+
+@mixin bg-transition {
+  transition: background-color 0.4s ease-out;
+}
+
+@mixin focus {
+  &:focus {
+    outline: 2px solid rgb(4, 155, 4);
+  }
+}
+
+//media-query
+@mixin for-mobile {
+  @media only screen and (max-width: 526px) {
+    @content;
+  }
+}
 
 .header {
   text-align: center;
   margin: 0.4em 0;
+  position: relative;
+  z-index: 1;
+  padding: 0.2em;
+  letter-spacing: 0.05em;
+  &:after {
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: 50%;
+    height: 100%;
+    width: 35%;
+    border: 1px solid rgb(170, 166, 166);
+    border-radius: 0.1em;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .form {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1em;
+  white-space: nowrap;
+  margin: 0 0.2em 0.4em;
+  @include for-mobile {
+  }
 
   .input {
-    width: 30%;
+    width: 35%;
     font-size: 1rem;
     padding: 0.25em;
-    &:focus {
-      background: $highlight-bg-color;
+    @include focus;
+  }
+
+  .btn {
+    color: rgb(18, 129, 18);
+    font-size: 1.6rem;
+    padding-top: 0.25em;
+    background: transparent;
+    border: none;
+    transition: color 0.2s ease-out;
+    transform: translateX(-120%);
+    cursor: pointer;
+    &:hover {
+      color: rgb(0, 160, 0);
+    }
+    @include for-mobile {
+      transform: none;
     }
   }
 
   .select-container {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 
     .label {
       font-size: 1rem;
       text-align: center;
-      margin: 0.25em;
+      margin-right: 0.25em;
     }
+
     #priority-select {
       font-size: 1rem;
       text-transform: capitalize;
       padding: 0.25em;
       cursor: pointer;
+      @include bg-transition;
       &:hover {
         background: $highlight-bg-color;
       }
-    }
-  }
-
-  .btn {
-    color: green;
-    font-size: 1.8rem;
-    padding-top: 0.25em;
-    background: transparent;
-    border: none;
-    transition: all 0.2s ease-out;
-    cursor: pointer;
-    &:hover {
-      transform: scale(1.05);
+      @include focus;
     }
   }
 }
@@ -61,28 +102,33 @@ $highlight-bg-color: rgba(181, 238, 233, 0.3);
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .todo {
+  color: #212121;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1em;
+  gap: 0.75em;
   list-style: none;
   text-align: center;
-  padding: 0.25em;
-  background: rgba(255, 166, 0, 0.2);
-  border: 1px solid yellowgreen;
-  transition: all 1s ease;
-  &:nth-child(1n):not(:last-child) {
-    border-bottom: none;
+  margin: 0.1em 0.2em;
+  padding: 0.2em;
+  background: rgba(255, 166, 0, 0.6);
+  border: 1px solid rgb(170, 166, 166);
+  border-radius: 0.1em;
+  box-shadow: 1px 0px 10px rgba(56, 56, 56, 0.1);
+  transition: transform 0.2s ease-out;
+  &:hover {
+    transform: scale(1.02);
   }
 
   &.high {
-    background: rgba(251, 4, 4, 0.2);
+    background: rgba(251, 4, 4, 0.3);
   }
   &.low {
-    background: rgba(156, 156, 156, 0.2);
+    background: rgba(156, 156, 156, 0.4);
   }
 
   .todo-item {
@@ -99,7 +145,7 @@ $highlight-bg-color: rgba(181, 238, 233, 0.3);
 
   .date {
     font-size: 0.7rem;
-    margin: 0 1em;
+    margin: 0 1em 0.25em;
   }
 
   .edit-btn,
@@ -107,18 +153,44 @@ $highlight-bg-color: rgba(181, 238, 233, 0.3);
   .completed-btn {
     cursor: pointer;
     color: rgb(233, 77, 77);
-    font-size: 1.25rem;
-    background: transparent;
-    border: none;
+    font-size: 1.3rem;
+    background: rgba(237, 230, 240, 0.6);
+    border: 1px solid rgb(206, 146, 146);
+    padding: 0.15em 0.15em 0;
     margin: 0 0.25em;
+    transition: transform 0.2s ease-out;
+    &:hover {
+      background: rgb(236, 234, 234);
+    }
+  }
+
+  .edit-btn {
+    color: orange;
   }
 
   .completed-btn {
     color: green;
   }
 
-  .edit-btn {
-    color: orange;
+  .delete-icon {
+    color: rgb(233, 77, 77);
+  }
+}
+
+.delete-all {
+  font-size: 1rem;
+  margin-top: 0.5em;
+  padding: 0.4em 4.3em;
+  background: whitesmoke;
+  text-transform: uppercase;
+  border: 2px solid rgb(226, 133, 133);
+  transition: border-color 0.5s ease-out;
+  cursor: pointer;
+  &:hover {
+    border-color: rgb(228, 34, 34);
+  }
+  &:focus {
+    outline-color: rgb(228, 34, 34);
   }
 }
 
@@ -138,8 +210,10 @@ $highlight-bg-color: rgba(181, 238, 233, 0.3);
     text-transform: capitalize;
     padding: 0.25em;
     cursor: pointer;
+    @include bg-transition;
     &:hover {
       background: $highlight-bg-color;
     }
+    @include focus;
   }
 }

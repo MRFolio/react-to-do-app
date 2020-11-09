@@ -1,10 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaPlusSquare } from "react-icons/fa";
 import shortid from "shortid";
 
 const Form = ({ tasks, setTasks }) => {
   const [input, setInput] = useState("");
   const [selection, setSelection] = useState("Normal");
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions()
+  );
+
+  function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window;
+    return { width, height };
+  }
+  const { width } = getWindowDimensions();
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [windowDimensions]);
 
   function handleInput(e) {
     setInput(e.target.value);
@@ -49,7 +66,8 @@ const Form = ({ tasks, setTasks }) => {
       </button>
       <div className="select-container">
         <label htmlFor="priority-select" className="label">
-          {window.innerWidth < 526 ? "Task priority:" : "Choose task priority:"}
+          {`${width > 526 ? "Choose" : ""} Task Priority`}
+          {/* {`${window.innerWidth > 526 ? "Choose" : ""} Task Priority:`} */}
         </label>
         <select onChange={handleSelection} name="priority" id="priority-select">
           <option value="normal">Normal</option>

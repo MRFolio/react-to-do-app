@@ -50,7 +50,7 @@ function App() {
         setTasks={setTasks}
         filteredTasks={filteredTasks}
       />
-      <Filter setFilterStatus={setFilterStatus} />
+      <Filter tasks={tasks} setFilterStatus={setFilterStatus} />
     </div>
   );
 }
