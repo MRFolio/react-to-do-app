@@ -1,34 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FaPlusSquare } from "react-icons/fa";
+import Selection from "./Selection";
 import shortid from "shortid";
 
 const Form = ({ tasks, setTasks }) => {
   const [input, setInput] = useState("");
-  const [selection, setSelection] = useState("Normal");
-  const [windowDimensions, setWindowDimensions] = useState(
-    getWindowDimensions()
-  );
-
-  function getWindowDimensions() {
-    const { innerWidth: width, innerHeight: height } = window;
-    return { width, height };
-  }
-  const { width } = getWindowDimensions();
-
-  useEffect(() => {
-    function handleResize() {
-      setWindowDimensions(getWindowDimensions());
-    }
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [windowDimensions]);
+  const [selection, setSelection] = useState("1");
 
   function handleInput(e) {
     setInput(e.target.value);
-  }
-
-  function handleSelection(e) {
-    setSelection(e.target.value);
   }
 
   function handleAddTask(e) {
@@ -64,17 +44,7 @@ const Form = ({ tasks, setTasks }) => {
       >
         <FaPlusSquare />
       </button>
-      <div className="select-container">
-        <label htmlFor="priority-select" className="label">
-          {`${width > 526 ? "Choose" : ""} Task Priority`}
-          {/* {`${window.innerWidth > 526 ? "Choose" : ""} Task Priority:`} */}
-        </label>
-        <select onChange={handleSelection} name="priority" id="priority-select">
-          <option value="normal">Normal</option>
-          <option value="high">high</option>
-          <option value="low">low</option>
-        </select>
-      </div>
+      <Selection setSelection={setSelection} />
     </form>
   );
 };

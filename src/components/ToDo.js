@@ -13,9 +13,7 @@ const ToDo = ({ text, date, completed, priority, id, tasks, setTasks }) => {
   function handleEditTask() {
     if (isEditing) {
       const editedTasks = tasks.map((task) =>
-        task.id === id
-          ? { id, text: editedInput, date, completed, priority }
-          : task
+        task.id === id ? { ...task, text: editedInput } : task
       );
       setTasks(editedTasks);
     }
@@ -39,12 +37,12 @@ const ToDo = ({ text, date, completed, priority, id, tasks, setTasks }) => {
   }
 
   return (
-    <div
+    <li
       className={`todo ${
-        priority === "high" ? "high" : priority === "low" ? "low" : ""
+        priority === "2" ? "high" : priority === "0" ? "low" : ""
       }`}
     >
-      <li className={`todo-item ${completed ? "completed" : ""}`}>
+      <div className={`todo-item ${completed ? "completed" : ""}`}>
         {isEditing ? (
           <input
             onChange={handleInputChange}
@@ -55,7 +53,7 @@ const ToDo = ({ text, date, completed, priority, id, tasks, setTasks }) => {
         ) : (
           text
         )}
-      </li>
+      </div>
       <div className="btns">
         <p className="date">
           <time dateTime={date} title="Date added">
@@ -87,7 +85,7 @@ const ToDo = ({ text, date, completed, priority, id, tasks, setTasks }) => {
           <FaTrashAlt />
         </button>
       </div>
-    </div>
+    </li>
   );
 };
 

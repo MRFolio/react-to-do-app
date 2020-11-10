@@ -1,11 +1,14 @@
 import ToDo from "./ToDo";
+import SortButton from "./SortButton";
 
-const ToDoList = ({ tasks, setTasks, filteredTasks }) => {
-  function handleClick() {
+const ToDoList = ({ tasks, setTasks, filteredTasks, setFilteredTasks }) => {
+  function handleDelete() {
     setTasks([]);
   }
+
   return (
-    <div className="tasks-container">
+    <section className="tasks-container">
+      {tasks.length > 0 && <SortButton tasks={tasks} setTasks={setTasks} />}
       <ul className="todo-list">
         {filteredTasks.map(({ text, date, completed, priority, id }) => (
           /* const { text, date, completed, priority, id } = task; */
@@ -22,11 +25,11 @@ const ToDoList = ({ tasks, setTasks, filteredTasks }) => {
         ))}
       </ul>
       {tasks.length > 0 && (
-        <button onClick={handleClick} className="delete-all">
+        <button onClick={handleDelete} className="delete-all">
           Delete All Tasks
         </button>
       )}
-    </div>
+    </section>
   );
 };
 

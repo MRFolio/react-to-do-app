@@ -44,13 +44,16 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Form tasks={tasks} setTasks={setTasks} />
-      <ToDoList
-        tasks={tasks}
-        setTasks={setTasks}
-        filteredTasks={filteredTasks}
-      />
-      <Filter tasks={tasks} setFilterStatus={setFilterStatus} />
+      <main>
+        <Form tasks={tasks} setTasks={setTasks} />
+        <ToDoList
+          tasks={tasks}
+          setTasks={setTasks}
+          filteredTasks={filteredTasks}
+          setFilteredTasks={setFilteredTasks}
+        />
+        <Filter tasks={tasks} setFilterStatus={setFilterStatus} />
+      </main>
     </div>
   );
 }
