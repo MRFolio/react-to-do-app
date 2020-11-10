@@ -1,9 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FaTrashAlt, FaEdit, FaCheck, FaTimes } from "react-icons/fa";
 
 const ToDo = ({ text, date, completed, priority, id, tasks, setTasks }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedInput, setEditedInput] = useState(text);
+
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (isEditing) {
+      inputRef.current.focus();
+    }
+  }, [isEditing]);
 
   function handleDeleteTask() {
     const newTaskList = tasks.filter((task) => task.id !== id);
@@ -39,7 +47,7 @@ const ToDo = ({ text, date, completed, priority, id, tasks, setTasks }) => {
   return (
     <li
       className={`todo ${
-        priority === "2" ? "high" : priority === "0" ? "low" : ""
+        priority === 2 ? "high" : priority === 0 ? "low" : ""
       }`}
     >
       <div className={`todo-item ${completed ? "completed" : ""}`}>
@@ -49,6 +57,7 @@ const ToDo = ({ text, date, completed, priority, id, tasks, setTasks }) => {
             value={editedInput}
             className="edit-input"
             type="text"
+            ref={inputRef}
           />
         ) : (
           text

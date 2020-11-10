@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FaPlusSquare } from "react-icons/fa";
 import Selection from "./Selection";
 import shortid from "shortid";
 
 const Form = ({ tasks, setTasks }) => {
   const [input, setInput] = useState("");
-  const [selection, setSelection] = useState("1");
+  const [selection, setSelection] = useState(1);
+
+  const inputRef = useRef(null);
+
+  useEffect(() => inputRef.current.focus(), []);
 
   function handleInput(e) {
     setInput(e.target.value);
@@ -14,7 +18,14 @@ const Form = ({ tasks, setTasks }) => {
   function handleAddTask(e) {
     if (input) {
       e.preventDefault();
-      const date = new Date().toLocaleDateString();
+      const date = Intl.DateTimeFormat(navigator.language, {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+      }).format(new Date());
       const newTask = {
         id: shortid.generate(),
         text: input,
@@ -34,6 +45,7 @@ const Form = ({ tasks, setTasks }) => {
         type="text"
         value={input}
         onChange={handleInput}
+        ref={inputRef}
         placeholder="Type in task..."
       />
       <button

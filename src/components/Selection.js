@@ -20,7 +20,7 @@ const Selection = ({ setSelection }) => {
   const { width } = getWindowDimensions();
 
   function handleSelection(e) {
-    setSelection(e.target.value);
+    setSelection(parseInt(e.target.value, 10));
   }
 
   return (
@@ -29,9 +29,9 @@ const Selection = ({ setSelection }) => {
         {`${width > 526 ? "Choose" : ""} Task Priority`}
       </label>
       <select onChange={handleSelection} name="priority" id="priority-select">
-        <option value="1">Normal</option>
-        <option value="2">high</option>
-        <option value="0">low</option>
+        <option value={1}>Normal</option>
+        <option value={2}>high</option>
+        <option value={0}>low</option>
       </select>
     </div>
   );
