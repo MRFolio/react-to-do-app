@@ -3,7 +3,7 @@ import { FaPlusSquare } from "react-icons/fa";
 import Selection from "./Selection";
 import shortid from "shortid";
 
-const Form = ({ tasks, setTasks }) => {
+const Form = ({ tasks, setTasks, showAlert }) => {
   const [input, setInput] = useState("");
   const [selection, setSelection] = useState(1);
 
@@ -16,8 +16,8 @@ const Form = ({ tasks, setTasks }) => {
   }
 
   function handleAddTask(e) {
+    e.preventDefault();
     if (input) {
-      e.preventDefault();
       const date = Intl.DateTimeFormat(navigator.language, {
         weekday: "short",
         month: "short",
@@ -35,11 +35,14 @@ const Form = ({ tasks, setTasks }) => {
       };
       setTasks([newTask, ...tasks]);
       setInput("");
+      showAlert(true, "success", "Task was added!");
+    } else if (!input) {
+      showAlert(true, "danger", "Please enter value!");
     }
   }
 
   return (
-    <form className="form">
+    <form onSubmit={handleAddTask} className="form">
       <input
         className="input"
         type="text"
@@ -48,12 +51,7 @@ const Form = ({ tasks, setTasks }) => {
         ref={inputRef}
         placeholder="Type in task..."
       />
-      <button
-        onClick={handleAddTask}
-        className="btn"
-        type="submit"
-        title="Add task"
-      >
+      <button className="btn" type="submit" title="Add task">
         <FaPlusSquare />
       </button>
       <Selection setSelection={setSelection} />

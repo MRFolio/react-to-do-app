@@ -1,7 +1,17 @@
 import { useState, useEffect, useRef } from "react";
 import { FaTrashAlt, FaEdit, FaCheck, FaTimes } from "react-icons/fa";
+import Button from "./Button";
 
-const ToDo = ({ text, date, completed, priority, id, tasks, setTasks }) => {
+const ToDo = ({
+  text,
+  date,
+  completed,
+  priority,
+  id,
+  tasks,
+  setTasks,
+  showAlert,
+}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedInput, setEditedInput] = useState(text);
 
@@ -16,6 +26,7 @@ const ToDo = ({ text, date, completed, priority, id, tasks, setTasks }) => {
   function handleDeleteTask() {
     const newTaskList = tasks.filter((task) => task.id !== id);
     setTasks(newTaskList);
+    showAlert(true, "danger", "Task was deleted!");
   }
 
   function handleEditTask() {
@@ -24,6 +35,7 @@ const ToDo = ({ text, date, completed, priority, id, tasks, setTasks }) => {
         task.id === id ? { ...task, text: editedInput } : task
       );
       setTasks(editedTasks);
+      showAlert(true, "success", "Task was edited!");
     }
     setIsEditing(!isEditing);
   }
@@ -43,7 +55,6 @@ const ToDo = ({ text, date, completed, priority, id, tasks, setTasks }) => {
     );
     setTasks(completedTasks);
   }
-
   return (
     <li
       className={`todo ${
@@ -69,30 +80,24 @@ const ToDo = ({ text, date, completed, priority, id, tasks, setTasks }) => {
             {date}
           </time>
         </p>
-        <button
+        <Button
           onClick={handleEditTask}
           className="edit-btn"
-          type="button"
-          title="Edit Task"
-        >
-          <FaEdit />
-        </button>
-        <button
+          title="Edit task"
+          icon={<FaEdit />}
+        />
+        <Button
           onClick={handleCompletedTask}
           className="completed-btn"
-          type="button"
           title={!completed ? "Task is completed" : "Task is not completed"}
-        >
-          {!completed ? <FaCheck /> : <FaTimes className="delete-icon" />}
-        </button>
-        <button
+          icon={!completed ? <FaCheck /> : <FaTimes className="delete-icon" />}
+        />
+        <Button
           onClick={handleDeleteTask}
           className="delete-btn"
-          type="button"
           title="Delete Task"
-        >
-          <FaTrashAlt />
-        </button>
+          icon={<FaTrashAlt />}
+        />
       </div>
     </li>
   );

@@ -23,24 +23,26 @@ $border-color: rgb(170, 166, 166);
   }
 }
 
-.header {
+.App {
+  border: 3px solid rgb(235, 178, 72);
+  width: fit-content;
+  white-space: nowrap;
+  margin: 1vh auto;
+  background: linear-gradient(to bottom, #f6f6f6 0%, #a7ad85 100%) no-repeat
+    fixed;
+}
+
+.alert {
   text-align: center;
-  margin: 0.4em 0;
-  position: relative;
-  z-index: 1;
-  padding: 0.2em;
-  letter-spacing: 0.05em;
-  &:after {
-    position: absolute;
-    content: "";
-    top: 50%;
-    left: 50%;
-    height: 100%;
-    width: 40%;
-    border: 1px solid $border-color;
-    border-radius: 0.1em;
-    z-index: -1;
-    transform: translate(-50%, -50%);
+  color: rgb(251, 250, 250);
+  font-size: 1.5rem;
+  padding: 0.3em;
+  &.alert-danger {
+    background-color: rgb(233, 77, 77);
+  }
+  &.alert-success {
+    background-color: rgb(30, 122, 30);
+    border-bottom: 5px solid;
   }
 }
 
@@ -73,7 +75,7 @@ $border-color: rgb(170, 166, 166);
       color: rgb(0, 160, 0);
     }
     @include for-mobile {
-      transform: none;
+      display: none;
     }
   }
 
@@ -85,7 +87,7 @@ $border-color: rgb(170, 166, 166);
     .label {
       font-size: 1rem;
       text-align: center;
-      margin-right: 0.25em;
+      margin: 0 0.25em;
     }
 
     #priority-select {
@@ -103,6 +105,7 @@ $border-color: rgb(170, 166, 166);
 }
 
 .tasks-container {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -117,6 +120,7 @@ $border-color: rgb(170, 166, 166);
   background: whitesmoke;
   border: 1px solid $border-color;
   border-radius: 0.1em;
+  margin-bottom: 0.3em;
   cursor: pointer;
   &:hover {
     @include outline;
@@ -126,6 +130,10 @@ $border-color: rgb(170, 166, 166);
   }
 }
 
+.todo-list {
+  width: 92%;
+}
+
 .todo {
   display: flex;
   justify-content: space-between;
@@ -133,13 +141,14 @@ $border-color: rgb(170, 166, 166);
   gap: 0.75em;
   list-style: none;
   text-align: center;
-  margin: 0.1em 0.2em;
+  margin: 0.1em auto;
   padding: 0.2em;
   background: rgba(255, 166, 0, 0.6);
   border: 1px solid $border-color;
   border-radius: 0.1em;
   box-shadow: 1px 0px 10px rgba(56, 56, 56, 0.1);
   transition: transform 0.2s ease-out;
+  will-change: transform;
   &:hover {
     transform: scale(1.02);
   }
@@ -152,6 +161,7 @@ $border-color: rgb(170, 166, 166);
   }
 
   .todo-item {
+    overflow: hidden;
     &.completed {
       text-decoration: line-through;
       opacity: 0.5;

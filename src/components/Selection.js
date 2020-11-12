@@ -20,7 +20,7 @@ const Selection = ({ setSelection }) => {
   const { width } = getWindowDimensions();
 
   function handleSelection(e) {
-    setSelection(parseInt(e.target.value, 10));
+    setSelection(Number(e.target.value));
   }
 
   return (

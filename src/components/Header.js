@@ -1,7 +1,11 @@
+import styles from "./Header.module.scss";
+
 const Header = () => {
   return (
-    <header className="header">
-      <h3 className="title">To-do List</h3>
+    <header className={styles.header}>
+      <h3 className={styles.title}>
+        <span className={styles["span-header"]}>To-do List</span>
+      </h3>
     </header>
   );
 };

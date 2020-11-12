@@ -1,9 +1,10 @@
 import ToDo from "./ToDo";
 import SortButton from "./SortButton";
 
-const ToDoList = ({ tasks, setTasks, filteredTasks }) => {
+const ToDoList = ({ tasks, setTasks, filteredTasks, showAlert }) => {
   function handleDelete() {
     setTasks([]);
+    showAlert(true, "danger", "All tasks were deleted!");
   }
 
   return (
@@ -24,6 +25,7 @@ const ToDoList = ({ tasks, setTasks, filteredTasks }) => {
             id={id} */
             {...item}
             key={item.id}
+            showAlert={showAlert}
           />
         ))}
       </ul>
