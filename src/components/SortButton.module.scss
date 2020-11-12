@@ -1,0 +1,19 @@
+@import "../styles/main.scss";
+
+.sort-btn {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  padding: 0.25em 3.2em;
+  background: whitesmoke;
+  border: 1px solid green;
+  border-radius: 0.1em;
+  margin: 0.3em 0;
+  cursor: pointer;
+  &:hover {
+    @include outline;
+  }
+  .sort-icon {
+    margin-left: 0.5em;
+  }
+}

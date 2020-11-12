@@ -1,5 +1,6 @@
 import ToDo from "./ToDo";
 import SortButton from "./SortButton";
+import styles from "./ToDoList.module.scss";
 
 const ToDoList = ({ tasks, setTasks, filteredTasks, showAlert }) => {
   function handleDelete() {
@@ -8,9 +9,9 @@ const ToDoList = ({ tasks, setTasks, filteredTasks, showAlert }) => {
   }
 
   return (
-    <section className="tasks-container">
+    <section className={styles["tasks-container"]}>
       {tasks.length > 0 && <SortButton tasks={tasks} setTasks={setTasks} />}
-      <ul className="todo-list">
+      <ul className={styles["todo-list"]}>
         {filteredTasks.map((
           /* { text, date, completed, priority, id } */ item
         ) => (
@@ -30,7 +31,7 @@ const ToDoList = ({ tasks, setTasks, filteredTasks, showAlert }) => {
         ))}
       </ul>
       {tasks.length > 0 && (
-        <button onClick={handleDelete} className="delete-all">
+        <button onClick={handleDelete} className={styles["delete-all"]}>
           Delete All Tasks
         </button>
       )}

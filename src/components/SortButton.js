@@ -1,4 +1,5 @@
 import { FaSortAmountDown } from "react-icons/fa";
+import styles from "./SortButton.module.scss";
 
 const SortButton = ({ tasks, setTasks }) => {
   function handleSort() {
@@ -6,9 +7,9 @@ const SortButton = ({ tasks, setTasks }) => {
     setTasks(sortedTasks);
   }
   return (
-    <button onClick={handleSort} className="sort-btn" type="button">
+    <button onClick={handleSort} className={styles["sort-btn"]} type="button">
       Sort tasks by priority:
-      <FaSortAmountDown className="sort-icon" />
+      <FaSortAmountDown className={styles["sort-icon"]} />
     </button>
   );
 };

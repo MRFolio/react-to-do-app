@@ -1,0 +1,25 @@
+@import "../styles/main.scss";
+
+.select-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .label {
+    font-size: 1rem;
+    text-align: center;
+    margin: 0 0.2em;
+  }
+
+  .priority-select {
+    font-size: 1rem;
+    text-transform: capitalize;
+    padding: 0.25em;
+    cursor: pointer;
+    @include bg-transition;
+    &:hover {
+      @include outline;
+    }
+    @include focus;
+  }
+}

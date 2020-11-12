@@ -1,0 +1,31 @@
+@import "../styles/main.scss";
+
+.tasks-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.todo-list {
+  max-width: 92%;
+}
+
+.delete-all {
+  font-size: 1rem;
+  margin-top: 0.5em;
+  padding: 0.25em 5.1em;
+  background: whitesmoke;
+  text-transform: capitalize;
+  border: 1px solid rgb(199, 108, 108);
+  border-radius: 0.1em;
+  transition: border-color 0.3s ease-out, outline 0.8s ease-out;
+  cursor: pointer;
+  &:hover {
+    border-color: rgb(223, 69, 69);
+    outline: 1px solid rgb(228, 34, 34);
+  }
+  &:focus {
+    outline-color: rgb(228, 34, 34);
+  }
+}

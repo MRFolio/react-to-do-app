@@ -1,0 +1,25 @@
+@import "../styles/main.scss";
+
+.filter-container {
+  margin: 0.4em 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .label-filter {
+    font-size: 1rem;
+    text-align: center;
+    margin: 0.25em;
+  }
+  .filter-select {
+    font-size: 1rem;
+    text-transform: capitalize;
+    padding: 0.25em;
+    cursor: pointer;
+    @include bg-transition;
+    &:hover {
+      outline: 2px solid $highlight-bg-color;
+    }
+    @include focus;
+  }
+}

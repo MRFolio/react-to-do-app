@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { FaPlusSquare } from "react-icons/fa";
 import Selection from "./Selection";
 import shortid from "shortid";
+import styles from "./Form.module.scss";
 
 const Form = ({ tasks, setTasks, showAlert }) => {
   const [input, setInput] = useState("");
@@ -42,16 +43,16 @@ const Form = ({ tasks, setTasks, showAlert }) => {
   }
 
   return (
-    <form onSubmit={handleAddTask} className="form">
+    <form onSubmit={handleAddTask} className={styles.form}>
       <input
-        className="input"
+        className={styles.input}
         type="text"
         value={input}
         onChange={handleInput}
         ref={inputRef}
         placeholder="Type in task..."
       />
-      <button className="btn" type="submit" title="Add task">
+      <button className={styles.btn} type="submit" title="Add task">
         <FaPlusSquare />
       </button>
       <Selection setSelection={setSelection} />

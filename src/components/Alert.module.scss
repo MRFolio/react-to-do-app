@@ -1,0 +1,15 @@
+@mixin alertStyle($bgColor) {
+  text-align: center;
+  color: rgb(251, 250, 250);
+  font-size: 1.5rem;
+  padding: 0.3em;
+  background-color: $bgColor;
+}
+
+.danger-alert {
+  @include alertStyle(rgb(233, 77, 77));
+}
+
+.success-alert {
+  @include alertStyle(rgb(52, 121, 52));
+}

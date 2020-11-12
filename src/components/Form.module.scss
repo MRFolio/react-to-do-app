@@ -1,0 +1,35 @@
+@import "../styles/main.scss";
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  margin: 0 0.1em 0.2em;
+  @include for-mobile {
+  }
+
+  .input {
+    width: 37%;
+    font-size: 1rem;
+    padding: 0.25em;
+    @include focus;
+  }
+
+  .btn {
+    color: rgb(18, 129, 18);
+    font-size: 1.6rem;
+    padding-top: 0.25em;
+    background: transparent;
+    border: none;
+    transition: color 0.2s ease-out;
+    transform: translateX(-120%);
+    cursor: pointer;
+    &:hover {
+      color: rgb(0, 160, 0);
+    }
+    @include for-mobile {
+      transform: translateX(5%);
+    }
+  }
+}
